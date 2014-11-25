@@ -160,14 +160,6 @@ else
   HOME=$build_dir gem install bundler --user-install --no-rdoc --no-ri
 fi
 
-bundle install 2>&1 | indent
-
-# run bower install
-bower install 2>&1 | indent
-
-# run l10ns compile
-l10ns compile 2>&1 | indent
-
 # cache ruby gems compass
 rm -rf $cache_dir/ruby
 mkdir -p $cache_dir/ruby
@@ -182,6 +174,18 @@ status "Building runtime environment"
 mkdir -p $build_dir/.profile.d
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 echo "export PATH=\"\$HOME/.gem/ruby/1.9.1/bin:\$PATH\"" > $build_dir/.profile.d/ruby.sh
+
+# run bundle install
+status "Installing bundler dependencies"
+bundle install 2>&1 | indent
+
+# run bower install
+status "Installing bower dependencies"
+bower install 2>&1 | indent
+
+# run l10ns compile
+status "Compiling localization strings"
+l10ns compile 2>&1 | indent
 
 # Check and run Grunt
 (
