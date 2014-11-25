@@ -42,7 +42,7 @@ Create a new app with this buildpack:
 
 Or add this buildpack to your current app:
 
-    heroku config:add BUILDPACK_URL=https://github.com/stephanmelzer/heroku-buildpack-nodejs-grunt-compass.git
+    heroku config:add BUILDPACK_URL=https://github.com/tinganho/heroku-buildpack.git
 
 Set the `NODE_ENV` environment variable (e.g. `development` or `production`):
 
