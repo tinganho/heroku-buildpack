@@ -101,7 +101,7 @@ fi
     export_env_dir $env_dir
   fi
 
-  status "Installing dependencies"
+  status "Installing Node dependencies"
   # Make npm output to STDOUT instead of its default STDERR
   npm install --userconfig $build_dir/.npmrc 2>&1 | indent
   npm install l10ns -g --userconfig $build_dir/.npmrc 2>&1 | indent
@@ -149,22 +149,24 @@ if [ ! -e $build_dir/Procfile ]; then
 fi
 
 # install compass
-status "Installing Compass"
+status "Installing Bundler"
 export GEM_HOME=$build_dir/.gem/ruby/1.9.1
 PATH="$GEM_HOME/bin:$PATH"
 if test -d $cache_dir/ruby/.gem; then
   status "Restoring ruby gems directory from cache"
   cp -r $cache_dir/ruby/.gem $build_dir
-  HOME=$build_dir gem update compass --user-install --no-rdoc --no-ri
+  HOME=$build_dir gem update bundler --user-install --no-rdoc --no-ri
 else
-  HOME=$build_dir gem install compass --user-install --no-rdoc --no-ri
+  HOME=$build_dir gem install bundler --user-install --no-rdoc --no-ri
 fi
 
+bundle install 2>&1 | indent
+
 # run bower install
-bower install
+bower install 2>&1 | indent
 
 # run l10ns compile
-l10ns compile
+l10ns compile 2>&1 | indent
 
 # cache ruby gems compass
 rm -rf $cache_dir/ruby
