@@ -160,6 +160,12 @@ else
   HOME=$build_dir gem install compass --user-install --no-rdoc --no-ri
 fi
 
+# run bower install
+bower install
+
+# run l10ns compile
+l10ns compile
+
 # cache ruby gems compass
 rm -rf $cache_dir/ruby
 mkdir -p $cache_dir/ruby
