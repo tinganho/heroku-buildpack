@@ -107,7 +107,7 @@ fi
   status "Installing Node dependencies"
   # Make npm output to STDOUT instead of its default STDERR
   npm install --userconfig $build_dir/.npmrc 2>&1 | indent
-  # npm install l10ns -g --userconfig $build_dir/.npmrc 2>&1 | indent
+  npm install l10ns -g --userconfig $build_dir/.npmrc 2>&1 | indent
   npm install bower -g --userconfig $build_dir/.npmrc 2>&1 | indent
 )
 
@@ -183,7 +183,7 @@ bower install 2>&1 | indent
 
 # run l10ns compile
 status "Compiling localization strings"
-# l10ns compile 2>&1 | indent
+l10ns compile 2>&1 | indent
 
 # Check and run Grunt
 (
