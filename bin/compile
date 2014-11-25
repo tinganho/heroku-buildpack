@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+export LANG="C.UTF-8"
+export LC_ALL="C.UTF-8"
+
 set -e            # fail fast
 set -o pipefail   # don't ignore exit codes when piping output
 # set -x          # enable debugging
@@ -104,7 +107,7 @@ fi
   status "Installing Node dependencies"
   # Make npm output to STDOUT instead of its default STDERR
   npm install --userconfig $build_dir/.npmrc 2>&1 | indent
-  npm install l10ns -g --userconfig $build_dir/.npmrc 2>&1 | indent
+  # npm install l10ns -g --userconfig $build_dir/.npmrc 2>&1 | indent
   npm install bower -g --userconfig $build_dir/.npmrc 2>&1 | indent
 )
 
