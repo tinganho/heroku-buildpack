@@ -185,6 +185,12 @@ bower install 2>&1 | indent
 status "Compiling localization strings"
 l10ns compile 2>&1 | indent
 
+# compile the composer object
+node Application/start.js &
+last_pid=$!
+sleep(5)
+kill -KILL $last_pid
+
 # Check and run Grunt
 (
   if $is_gruntfile_present; then
@@ -199,10 +205,6 @@ l10ns compile 2>&1 | indent
   fi
 )
 
-node Application/start.js &
-last_pid=$!
-sleep(5)
-kill -KILL $last_pid
 
 # Post package.json to nomnom service
 # Use a subshell so failures won't break the build.
