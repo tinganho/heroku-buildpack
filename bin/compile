@@ -173,13 +173,6 @@ mkdir -p $build_dir/.profile.d
 echo "export PATH=\"\$HOME/vendor/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\";" > $build_dir/.profile.d/nodejs.sh
 echo "export PATH=\"\$HOME/.gem/ruby/1.9.1/bin:\$PATH\"" > $build_dir/.profile.d/ruby.sh
 
-# compile the composer object
-status "Compiling composer object"
-NODE_ENV=development node Application/start.js &
-last_pid=$!
-sleep 5
-kill -KILL $last_pid
-
 # run bundle install
 status "Installing bundler dependencies"
 bundle install 2>&1 | indent
@@ -191,6 +184,13 @@ bower install 2>&1 | indent
 # run l10ns compile
 status "Compiling localization strings"
 l10ns compile 2>&1 | indent
+
+# compile the composer object
+status "Compiling composer object"
+NODE_ENV=development node Application/start.js &
+last_pid=$!
+sleep 5
+kill -KILL $last_pid
 
 
 # Check and run Grunt
