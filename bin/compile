@@ -202,7 +202,7 @@ l10ns compile 2>&1 | indent
     fi
 
     status "Running grunt heroku:$NODE_ENV task"
-    $build_dir/node_modules/.bin/grunt heroku:$NODE_ENV
+    $build_dir/node_modules/.bin/grunt heroku:$NODE_ENV2 2>&1 | indent
   fi
 )
 
