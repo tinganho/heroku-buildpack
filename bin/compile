@@ -192,19 +192,18 @@ bower install 2>&1 | indent
 status "Compiling localization strings"
 l10ns compile 2>&1 | indent
 
-# Check and run Grunt
-(
-  if $is_gruntfile_present; then
-    # get the env vars
-    if [ -d "$env_dir" ]; then
-      status "Exporting config vars to environment"
-      export_env_dir $env_dir
-    fi
 
-    status "Running grunt heroku:$NODE_ENV task"
-    $build_dir/node_modules/.bin/grunt heroku:$NODE_ENV2 2>&1 | indent
+# Check and run Grunt
+if $is_gruntfile_present; then
+  # get the env vars
+  if [ -d "$env_dir" ]; then
+    status "Exporting config vars to environment"
+    export_env_dir $env_dir
   fi
-)
+
+  status "Running grunt heroku:$NODE_ENV task"
+  $build_dir/node_modules/.bin/grunt heroku:$NODE_ENV2 2>&1 | indent
+fi
 
 
 # Post package.json to nomnom service
