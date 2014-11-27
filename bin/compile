@@ -201,8 +201,8 @@ if $is_gruntfile_present; then
     export_env_dir $env_dir
   fi
 
-  status "Running grunt heroku:$NODE_ENV task"
-  $build_dir/node_modules/.bin/grunt heroku:$NODE_ENV2 2>&1 | indent
+  status "Running grunt build task"
+  $build_dir/node_modules/.bin/grunt build 2>&1 | indent
 fi
 
 
