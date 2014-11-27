@@ -188,7 +188,7 @@ l10ns compile 2>&1 | indent
 # compile the composer object
 NODE_ENV=production node Application/start.js &
 last_pid=$!
-sleep(5)
+sleep 5
 kill -KILL $last_pid
 
 # Check and run Grunt
