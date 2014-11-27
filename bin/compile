@@ -186,7 +186,9 @@ status "Compiling localization strings"
 l10ns compile 2>&1 | indent
 
 # compile the composer object
+
 status "Compiling composer object"
+$build_dir/node_modules/.bin/grunt dot
 NODE_ENV=development node Application/start.js &
 last_pid=$!
 sleep 5
